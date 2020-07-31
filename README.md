@@ -1,4 +1,4 @@
-## aliyun_ddns --基于阿里云解析的动态域名解析
+## aliyun_ddns --基于阿里云解析的动态域名解析(python3)
 
 ### 前提条件
 1. 确保自己拥有外网ip
@@ -18,7 +18,14 @@
 3. 定时执行 python3 aliyun_ddns.py   (windows和linux环境下的定时任务就不提了)
 4. 最新的ip会保存在同级目录的ip.txt中，方便查看
 5. 脚本的执行步骤有日志，如有问题，先分析下输出内容
+```
+2020-07-31 14:46:06,476 - INFO - get current ip  61.140.177.12
+2020-07-31 14:46:06,485 - INFO - get current resolution params
+2020-07-31 14:46:07,038 - INFO - signed resolution params
+2020-07-31 14:46:07,699 - INFO - update resolution successfully
+```
 
 ### 注意
 修改完解析记录后并不会马上生效，因为dns服务都有缓存，所以得等，阿里云的解析ttl可以设置的最小值为10分钟，所以有时候得等一会才能生效。
 如果迟迟不生效，首先登录阿里云控制台查看解析记录是否成功修改，如果已经修改，那么就是dns服务的缓存问题了，这个基本就是死等。。。
+
