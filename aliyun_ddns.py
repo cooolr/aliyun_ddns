@@ -120,6 +120,7 @@ def get_lastest_ip():
 if __name__ == '__main__':
     curr_ip = get_curr_ip()
     last_ip = get_lastest_ip()
+    
     if curr_ip != last_ip:
         update_resolution(curr_ip)
 
