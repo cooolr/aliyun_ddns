@@ -83,7 +83,7 @@ def update_resolution(ip):
         exit()
 
     for record in records['DomainRecords']['Record']:
-        if record['RR'] != pre_domain:
+        if record['RR'] != pre_domain or record['Type'] == 'MX':
             continue
         logging.info('signed resolution params')
         post_params = get_signed_params('POST', {
@@ -117,6 +117,12 @@ def get_curr_ip():
     logging.info(f'get current ip  {ip}')
     return ip
 
+def get_curr_ipv6():
+    ip = os.popen('ifconfig').read().strip()
+    v6 = re.findall('inet6 (.*?)  .*?global', ip)
+    if v6:
+        logging.info(f'get current ipv6  {v6[0]}')
+        return v6[0]
 
 def get_lastest_ip():
     if os.path.exists(LAST_IP):
@@ -128,9 +134,10 @@ def get_lastest_ip():
 
 if __name__ == '__main__':
     curr_ip = get_curr_ip()
+    # curr_ip = get_curr_ipv6()
     last_ip = get_lastest_ip()
 
-    if curr_ip != last_ip:
+    if curr_ip and curr_ip != last_ip:
         update_resolution(curr_ip)
 
         with open(LAST_IP, 'w') as f:
