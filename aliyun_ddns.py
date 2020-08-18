@@ -73,7 +73,7 @@ def update_resolution(ip):
     get_params = get_signed_params('GET', {
         'Action': 'DescribeDomainRecords',
         'DomainName': root_domain,
-        'TypeKeyWord': 'A'
+        #'TypeKeyWord': 'A'
     }, settings)
     logging.info('get current resolution params')
     get_resp = requests.get(REQUEST_URL, get_params)
